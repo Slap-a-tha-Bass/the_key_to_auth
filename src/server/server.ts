@@ -1,8 +1,10 @@
 import * as express from 'express';
 import routes from './routes';
+import { configurePassport } from './middlewares/passport-strategies.mw'; 
 
 const app = express();
 
+configurePassport(app);
 app.use(express.json());
 app.use(express.static('public'));
 app.use(routes);
