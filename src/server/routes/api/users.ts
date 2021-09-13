@@ -1,12 +1,10 @@
 import * as express from 'express';
-import * as jwt from 'jsonwebtoken';
 import { ReqUser } from '../../../../types';
-import { authenticate } from 'passport';
-import { jwtConfig } from '../../config/users';
+import { tokenCheck } from '../../middlewares/auth.mw';
 
 const router = express.Router();
 
-router.get('/', authenticate('jwt'),(req: ReqUser, res) => {
+router.get('/', tokenCheck, (req: ReqUser, res) => {
     try {
         res.json({ message: `Enjoy your interweb time ${req.user.email}` });
     } catch (error) {
